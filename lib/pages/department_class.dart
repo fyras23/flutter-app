@@ -25,7 +25,7 @@ class _DepartmentClassesPageState extends State<DepartmentClassesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Color(0xFF84a59d),
+       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         title: Text(
           widget.department.name,

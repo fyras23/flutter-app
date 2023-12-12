@@ -74,9 +74,9 @@ void addAttendance(Attendance attendance) async {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ISET NABEUL',
+          'ISET ',
           style: TextStyle(
-            color: Color(0xFF004CFF),
+            color: Color.fromARGB(255, 255, 0, 0),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -88,7 +88,7 @@ void addAttendance(Attendance attendance) async {
           builder: (context) => IconButton(
             icon: const Icon(
               Icons.menu,
-              color: Color(0xFF004CFF),
+              color: Color.fromARGB(255, 255, 17, 0),
             ),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
@@ -100,7 +100,7 @@ void addAttendance(Attendance attendance) async {
             child: IconButton(
               icon: const Icon(
                 Icons.logout,
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 255, 0, 0),
               ),
               onPressed: () {
                 Navigator.push(context,
@@ -115,7 +115,7 @@ void addAttendance(Attendance attendance) async {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 255, 17, 0),
               ),
               child: Text(
                 'Menu',
@@ -230,6 +230,7 @@ void addAttendance(Attendance attendance) async {
             DropdownButtonFormField<Subject>(
               value: dropdownValue,
               icon: const Icon(Icons.arrow_downward),
+              
               decoration: const InputDecoration(
                 labelText: 'Subject',
               ),
@@ -251,12 +252,24 @@ void addAttendance(Attendance attendance) async {
       actions: <Widget>[
         TextButton(
           child: const Text('Cancel'),
+          style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
           onPressed: () {
             Navigator.of(context).pop();
           },
         ),
         TextButton(
           child: const Text('Add'),
+          style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
           onPressed: () {
             Attendance attendance = Attendance(
               date: _dateController.text,
@@ -281,9 +294,17 @@ void addAttendance(Attendance attendance) async {
 },
                         title: Text('${snapshot.data![index].firstName} ${snapshot.data![index].lastName}'),
                         subtitle: Text(snapshot.data![index].classRoom!.name),
-                        leading: const Icon(Icons.person),
+                        
+                        
                         trailing: IconButton(
                          icon: const Icon(Icons.remove_red_eye),
+                         style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
+                         
   onPressed: () async {
     // Retrieve the total attendance hours via API call
     try {
@@ -331,6 +352,12 @@ void addAttendance(Attendance attendance) async {
             actions: <Widget>[
               TextButton(
                 child: const Text('Close'),
+                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                 onPressed: () {
                   Navigator.of(context).pop();
                 },

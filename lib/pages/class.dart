@@ -53,9 +53,9 @@ class _ClassPageState extends State<ClassPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ISET NABEUL',
+          'ISET ',
           style: TextStyle(
-            color: Color(0xFF004CFF),
+            color: Color.fromARGB(255, 255, 0, 0),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -67,7 +67,7 @@ class _ClassPageState extends State<ClassPage> {
           return IconButton(
             icon: const Icon(
               Icons.menu,
-              color: Color(0xFF004CFF),
+              color: Color.fromARGB(255, 255, 0, 0),
             ),
             onPressed: () {
               Scaffold.of(context).openDrawer();
@@ -80,7 +80,7 @@ class _ClassPageState extends State<ClassPage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 255, 0, 0),
               ),
               child: Text(
                 'Menu',
@@ -146,7 +146,7 @@ class _ClassPageState extends State<ClassPage> {
               const Text(
                 'Manage classes',
                 style: TextStyle(
-                  color: Color(0xFF004CFF),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -161,7 +161,7 @@ class _ClassPageState extends State<ClassPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            backgroundColor: Color(0xFFC7DAD5),
+                            backgroundColor: Color.fromARGB(255, 255, 255, 255),
                             title: const Text('Add class'),
                             content: SizedBox(
                               width: 300,
@@ -237,6 +237,12 @@ class _ClassPageState extends State<ClassPage> {
                                   Navigator.pop(context);
                                 },
                                 child: const Text('Cancel'),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -258,6 +264,12 @@ class _ClassPageState extends State<ClassPage> {
                                   fetchClasses();
                                 },
                                 child: const Text('Add'),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                             ],
                           );
@@ -265,12 +277,33 @@ class _ClassPageState extends State<ClassPage> {
                       );
                     },
                     child: const Text('Add class'),
+                    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       fetchClasses();
                     },
-                    child: const Text('Refresh'),
+                    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
+                    child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const Icon(Icons.refresh, color: Colors.white), // Add refresh icon
+      const SizedBox(width: 8.0), // Add some space between icon and text
+      const Text('Refresh'),
+      
+    ],
+    
+  ),
                   ),
                 ],
               ),
@@ -304,6 +337,12 @@ class _ClassPageState extends State<ClassPage> {
                               IconButton(
                                 onPressed: () {},
                                 icon: const Icon(Icons.edit),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                               IconButton(
                                 onPressed: () {
@@ -317,6 +356,12 @@ class _ClassPageState extends State<ClassPage> {
                                   fetchClasses();
                                 },
                                 icon: const Icon(Icons.delete),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                             ],
                           ),

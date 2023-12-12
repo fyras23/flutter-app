@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-           backgroundColor: Color(0xFFC7DAD5),
+           backgroundColor: Color.fromARGB(255, 255, 255, 255),
           title: const Text('Update student'),
           content: Form(
             key: _formKey,
@@ -184,9 +184,9 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ISET NABEUL',
+          'ISET',
           style: TextStyle(
-            color: Color(0xFF004CFF),
+            color: Color.fromARGB(255, 255, 0, 0),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -198,7 +198,7 @@ class _HomePageState extends State<HomePage> {
           builder: (context) => IconButton(
             icon: const Icon(
               Icons.menu,
-              color: Color(0xFF004CFF),
+              color: Color.fromARGB(255, 255, 0, 0),
             ),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
@@ -210,7 +210,7 @@ class _HomePageState extends State<HomePage> {
             child: IconButton(
               icon: const Icon(
                 Icons.logout,
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 255, 0, 0),
               ),
               onPressed: () {
                 Navigator.push(context,
@@ -225,7 +225,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 255, 0, 0),
               ),
               child: Text(
                 'Menu',
@@ -288,7 +288,7 @@ class _HomePageState extends State<HomePage> {
               const Text(
                 'Manage students',
                 style: TextStyle(
-                  color: Color(0xFF004CFF),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -397,12 +397,34 @@ class _HomePageState extends State<HomePage> {
                       );
                     },
                     child: const Text('Add student'),
+                    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       fetchStudents();
+                      
                     },
-                    child: const Text('Refresh'),
+                    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
+                    child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const Icon(Icons.refresh, color: Colors.white), // Add refresh icon
+      const SizedBox(width: 8.0), // Add some space between icon and text
+      const Text('Refresh'),
+      
+    ],
+    
+  ),
                   ),
                 ],
               ),
@@ -427,6 +449,12 @@ class _HomePageState extends State<HomePage> {
                                   _showUpdateDialog(snapshot.data![index]);
                                 },
                                 icon: const Icon(Icons.edit),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                               IconButton(
                                 onPressed: () {
@@ -440,6 +468,12 @@ class _HomePageState extends State<HomePage> {
                                   fetchStudents();
                                 },
                                 icon: const Icon(Icons.delete),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                             ],
                           ),

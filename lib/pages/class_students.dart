@@ -38,12 +38,12 @@ class _ClassStudentsPageState extends State<ClassStudentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Color(0xFF84a59d),
+       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         title: Text(
           widget.classRoom.name,
           style: const TextStyle(
-            color: Color(0xFF004CFF),
+            color: Color.fromARGB(255, 0, 0, 0),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -61,7 +61,7 @@ class _ClassStudentsPageState extends State<ClassStudentsPage> {
             child: IconButton(
               icon: const Icon(
                 Icons.arrow_back_ios,
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 0, 0, 0),
                 size: 18,
               ),
               onPressed: () {
@@ -77,7 +77,7 @@ class _ClassStudentsPageState extends State<ClassStudentsPage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 0, 0, 0),
               ),
               child: Text(
                 'Menu',
@@ -132,7 +132,7 @@ class _ClassStudentsPageState extends State<ClassStudentsPage> {
               child: Text(
                 'Students',
                 style: TextStyle(
-                  color: Color(0xFF004CFF),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),

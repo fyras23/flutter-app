@@ -37,7 +37,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Color(0xFFC7DAD5),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           title: const Text('Update department'),
           content: SizedBox(
             width: 300,
@@ -65,6 +65,12 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 Navigator.pop(context);
               },
               child: const Text('Cancel'),
+              style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
             ),
             TextButton(
               onPressed: () {
@@ -80,6 +86,12 @@ class _DepartmentPageState extends State<DepartmentPage> {
                 fetchDepartments();
               },
               child: const Text('Update'),
+              style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
             ),
           ],
         );
@@ -92,9 +104,9 @@ class _DepartmentPageState extends State<DepartmentPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ISET NABEUL',
+          'ISET',
           style: TextStyle(
-            color: Color(0xFF004CFF),
+            color: Color.fromARGB(255, 255, 0, 0),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -106,7 +118,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
           return IconButton(
             icon: const Icon(
               Icons.menu,
-              color: Color(0xFF004CFF),
+              color: Color.fromARGB(255, 255, 0, 0),
             ),
             onPressed: () {
               Scaffold.of(context).openDrawer();
@@ -119,7 +131,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 255, 0, 0),
               ),
               child: Text(
                 'Menu',
@@ -185,7 +197,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
               const Text(
                 'Manage departments',
                 style: TextStyle(
-                  color: Color(0xFF004CFF),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -200,7 +212,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            backgroundColor: Color(0xFFC7DAD5),
+                            backgroundColor: Color.fromARGB(255, 255, 255, 255),
                             title: const Text('Add department'),
                             content: SizedBox(
                               width: 300,
@@ -228,6 +240,12 @@ class _DepartmentPageState extends State<DepartmentPage> {
                                   Navigator.pop(context);
                                 },
                                 child: const Text('Cancel'),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -245,6 +263,12 @@ class _DepartmentPageState extends State<DepartmentPage> {
                                   fetchDepartments();
                                 },
                                 child: const Text('Add'),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                             ],
                           );
@@ -252,12 +276,33 @@ class _DepartmentPageState extends State<DepartmentPage> {
                       );
                     },
                     child: const Text('Add department'),
+                    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       fetchDepartments();
                     },
-                    child: const Text('Refresh'),
+                    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
+                    child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const Icon(Icons.refresh, color: Colors.white), // Add refresh icon
+      const SizedBox(width: 8.0), // Add some space between icon and text
+      const Text('Refresh'),
+      
+    ],
+    
+  ),
                   ),
                 ],
               ),
@@ -292,6 +337,12 @@ class _DepartmentPageState extends State<DepartmentPage> {
                                   _showUpdateDialog(snapshot.data![index]);
                                 },
                                 icon: const Icon(Icons.edit),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                               IconButton(
                                 onPressed: () {
@@ -305,6 +356,12 @@ class _DepartmentPageState extends State<DepartmentPage> {
                                   fetchDepartments();
                                 },
                                 icon: const Icon(Icons.delete),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                             ],
                           ),

@@ -32,20 +32,19 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Sign Up',
+          '',
           style: TextStyle(
-            color: Color(0xFF004CFF),
+            color: Color(0xFF1E2432),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.white10,
+        backgroundColor: Colors.white,
         elevation: 0.0,
         centerTitle: true,
       ),
@@ -54,137 +53,95 @@ class _SignUpPageState extends State<SignUpPage> {
         child: Column(
           children: [
             const SizedBox(height: 80.0),
-            const Text('Sign up to create an account',
+            const Text('Sign up ',
                 style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16.0),
-            Form(
-              key: _formKey,
-              child: Column(
-                children: [
-                  TextFormField(
-                    controller: widget.firstNameController,
-                    keyboardType: TextInputType.name,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your first name';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'First Name',
-                      labelStyle: TextStyle(
-                        color: Color(0xFF004CFF),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF004CFF)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF004CFF)),
-                      ),
-                    ),
-                  ),
-                  TextFormField(
-                    controller: widget.lastNameController,
-                    keyboardType: TextInputType.name,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your last name';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Last Name',
-                      labelStyle: TextStyle(
-                        color: Color(0xFF004CFF),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF004CFF)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF004CFF)),
-                      ),
-                    ),
-                  ),
-                  TextFormField(
-                    controller: widget.emailController,
-                    keyboardType: TextInputType.emailAddress,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your email address';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Email',
-                      labelStyle: TextStyle(
-                        color: Color(0xFF004CFF),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF004CFF)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF1E2432)),
-                      ),
-                    ),
-                  ),
-                  TextFormField(
-                    controller: widget.passwordController,
-                    keyboardType: TextInputType.visiblePassword,
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Please enter your password';
-                      }
-                      return null;
-                    },
-                    decoration: const InputDecoration(
-                      labelText: 'Password',
-                      labelStyle: TextStyle(
-                        color: Color(0xFF004CFF),
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                      ),
-                      enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF004CFF)),
-                      ),
-                      focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Color(0xFF004CFF)),
-                      ),
-                    ),
-                  ),
-                ],
+            TextField(
+              controller: widget.firstNameController,
+              decoration: const InputDecoration(
+                labelText: 'First Name',
+                labelStyle: TextStyle(
+                  color: Color(0xFF1E2432),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF1E2432)),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF1E2432)),
+                ),
+              ),
+            ),
+            TextField(
+              controller: widget.lastNameController,
+              decoration: const InputDecoration(
+                labelText: 'Last Name',
+                labelStyle: TextStyle(
+                  color: Color(0xFF1E2432),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF1E2432)),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF1E2432)),
+                ),
+              ),
+            ),
+            TextField(
+              controller: widget.emailController,
+              decoration: const InputDecoration(
+                labelText: 'Email',
+                labelStyle: TextStyle(
+                  color: Color(0xFF1E2432),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF1E2432)),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF1E2432)),
+                ),
+              ),
+            ),
+            TextField(
+              controller: widget.passwordController,
+              decoration: const InputDecoration(
+                labelText: 'Password',
+                labelStyle: TextStyle(
+                  color: Color(0xFF1E2432),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF1E2432)),
+                ),
+                focusedBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(color: Color(0xFF1E2432)),
+                ),
               ),
             ),
             const SizedBox(height: 16.0),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton(
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color(0xFF004CFF),
-                  ),
+            ElevatedButton(
+              style: ButtonStyle(
+                backgroundColor: MaterialStateProperty.all<Color>(
+                  Color.fromARGB(255, 255, 0, 0),
+                  // Change button text color 
+                       
                 ),
-                onPressed: () {
-                  if (_formKey.currentState!.validate()) {
-                    widget.register();
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(content: Text('Sign up successful!')),
-                    );
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SignInPage(),
-                      ),
-                    );
-                  }
-                },
-                child: const Text('Sign Up'),
+                foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
               ),
+              onPressed: () {
+                widget.register();
+                SnackBar snackBar = const SnackBar(
+                  content: Text('Signed Up'),
+                );
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+              child: const Text('Sign Up'),
             ),
             const SizedBox(height: 16.0),
             const Text('Already have an account?'),
@@ -197,19 +154,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 );
               },
-              style: ButtonStyle(
-                foregroundColor: MaterialStateProperty.all<Color>(
-                  const Color(0xFF004CFF),
-                ),
-              ),
-              child: const Text(
-                'Sign In',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  decorationStyle: TextDecorationStyle.solid,
-                  decorationThickness: 2.0,
-                ),
-              ),
+              child: const Text('Sign In'),
             ),
           ],
         ),

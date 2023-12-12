@@ -43,7 +43,7 @@ class _SubjectPageState extends State<SubjectPage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-          backgroundColor: Color(0xFFC7DAD5),
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
           title: const Text('Update subject'),
           content: SizedBox(
             width: 300,
@@ -83,6 +83,12 @@ class _SubjectPageState extends State<SubjectPage> {
                 Navigator.pop(context);
               },
               child: const Text('Cancel'),
+              style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
             ),
             TextButton(
               onPressed: () {
@@ -99,11 +105,18 @@ class _SubjectPageState extends State<SubjectPage> {
                 Navigator.pop(context);
                 SnackBar snackBar = SnackBar(
                   content: Text('${_updateNameController.text} updated'),
+                  
                 );
                 ScaffoldMessenger.of(context).showSnackBar(snackBar);
                 fetchSubjects();
               },
               child: const Text('Update'),
+              style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
             ),
           ],
         );
@@ -116,9 +129,9 @@ class _SubjectPageState extends State<SubjectPage> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ISET NABEUL',
+          'ISET ',
           style: TextStyle(
-            color: Color(0xFF004CFF),
+            color: Color.fromARGB(255, 255, 0, 0),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -130,7 +143,7 @@ class _SubjectPageState extends State<SubjectPage> {
           return IconButton(
             icon: const Icon(
               Icons.menu,
-              color: Color(0xFF004CFF),
+              color: Color.fromARGB(255, 255, 0, 0),
             ),
             onPressed: () {
               Scaffold.of(context).openDrawer();
@@ -143,7 +156,7 @@ class _SubjectPageState extends State<SubjectPage> {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color(0xFF004CFF),
+                color: Color.fromARGB(255, 255, 0, 0),
               ),
               child: Text(
                 'Menu',
@@ -209,7 +222,7 @@ class _SubjectPageState extends State<SubjectPage> {
               const Text(
                 'Manage subjects',
                 style: TextStyle(
-                  color: Color(0xFF004CFF),
+                  color: Color.fromARGB(255, 0, 0, 0),
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -224,7 +237,7 @@ class _SubjectPageState extends State<SubjectPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            backgroundColor: Color(0xFFC7DAD5),
+                            backgroundColor: Color.fromARGB(255, 255, 255, 255),
                             title: const Text('Add subject'),
                             content: SizedBox(
                               width: 300,
@@ -264,6 +277,12 @@ class _SubjectPageState extends State<SubjectPage> {
                                   Navigator.pop(context);
                                 },
                                 child: const Text('Cancel'),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                               TextButton(
                                 onPressed: () {
@@ -287,6 +306,12 @@ class _SubjectPageState extends State<SubjectPage> {
                                   fetchSubjects();
                                 },
                                 child: const Text('Add'),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                             ],
                           );
@@ -294,12 +319,33 @@ class _SubjectPageState extends State<SubjectPage> {
                       );
                     },
                     child: const Text('Add subject'),
+                    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                   ),
                   ElevatedButton(
                     onPressed: () {
                       fetchSubjects();
                     },
-                    child: const Text('Refresh'),
+                    style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
+                    child: Row(
+    mainAxisSize: MainAxisSize.min,
+    children: [
+      const Icon(Icons.refresh, color: Colors.white), // Add refresh icon
+      const SizedBox(width: 8.0), // Add some space between icon and text
+      const Text('Refresh'),
+      
+    ],
+    
+  ),
                   ),
                 ],
               ),
@@ -324,6 +370,12 @@ class _SubjectPageState extends State<SubjectPage> {
                                   _showUpdateDialog(snapshot.data![index]);
                                 },
                                 icon: const Icon(Icons.edit),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                               IconButton(
                                 onPressed: () {
@@ -337,6 +389,12 @@ class _SubjectPageState extends State<SubjectPage> {
                                   fetchSubjects();
                                 },
                                 icon: const Icon(Icons.delete),
+                                style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
                               ),
                             ],
                           ),
