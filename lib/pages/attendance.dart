@@ -294,7 +294,7 @@ void addAttendance(Attendance attendance) async {
 },
                         title: Text('${snapshot.data![index].firstName} ${snapshot.data![index].lastName}'),
                         subtitle: Text(snapshot.data![index].classRoom!.name),
-                        
+                        leading: const Icon(Icons.person),
                         
                         trailing: IconButton(
                          icon: const Icon(Icons.remove_red_eye),

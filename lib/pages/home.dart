@@ -84,7 +84,7 @@ class _HomePageState extends State<HomePage> {
       context: context,
       builder: (context) {
         return AlertDialog(
-           backgroundColor: Color.fromARGB(255, 255, 255, 255),
+           backgroundColor: Color(0xFFC7DAD5),
           title: const Text('Update student'),
           content: Form(
             key: _formKey,

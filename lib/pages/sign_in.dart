@@ -12,44 +12,35 @@ class SignInPage extends StatefulWidget {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  void login(BuildContext context) async {
+  void login() async {
     try {
       final signedInUser = await signIn(
         emailController.text,
         passwordController.text,
       );
       print('Signed in user: $signedInUser');
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => const HomePage()),
-      );
     } catch (e) {
       print('Failed to sign in user: $e');
-      // Display an error message to the user if login fails
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Failed to sign in. Please check your credentials.'),
-          backgroundColor: Colors.red,
-        ),
-      );
     }
   }
 }
 
 class _SignInPageState extends State<SignInPage> {
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          '',
+          'Sign In',
           style: TextStyle(
-            color: Colors.black, // Change app bar text color
+            color: Color(0xFF004CFF),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.white10,
         elevation: 0.0,
         centerTitle: true,
       ),
@@ -58,45 +49,64 @@ class _SignInPageState extends State<SignInPage> {
         child: Column(
           children: [
             const SizedBox(height: 80.0),
-            const Text(
-              'Sign in ',
-              style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold, color: Colors.black), // Change text color
-            ),
+            const Text('Sign in to your account',
+                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold)),
             const SizedBox(height: 16.0),
-            TextField(
-              controller: widget.emailController,
-              decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(
-                  color: Colors.black, // Change label text color
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black), // Change border color
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black), // Change border color
-                ),
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            TextField(
-              controller: widget.passwordController,
-              obscureText: true,
-              decoration: InputDecoration(
-                labelText: 'Password',
-                labelStyle: TextStyle(
-                  color: Colors.black, // Change label text color
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black), // Change border color
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: Colors.black), // Change border color
-                ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: widget.emailController,
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email address';
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      labelText: 'Email Address',
+                      labelStyle: TextStyle(
+                        color: Color(0xFF004CFF),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF004CFF)),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF004CFF)),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 16.0),
+                  TextFormField(
+                    controller: widget.passwordController,
+                    keyboardType: TextInputType.visiblePassword,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your password';
+                      }
+                      return null;
+                    },
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      labelStyle: TextStyle(
+                        color: Color(0xFF004CFF),
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF004CFF)),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Color(0xFF004CFF)),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
             const SizedBox(height: 32.0),
@@ -104,33 +114,48 @@ class _SignInPageState extends State<SignInPage> {
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: () {
-                  widget.login(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    const Color.fromARGB(255, 255, 0, 0), // Change button background color
-                  ),
-                ),
-                child: const Text('Sign In', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white)), // Change button text color
-              ),
-            ),
-            const SizedBox(height: 16.0),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text('Don\'t have an account?', style: TextStyle(color: Colors.black)), // Change text color
-                TextButton(
-                  onPressed: () {
+                  if (_formKey.currentState!.validate()) {
+                    widget.login();
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => SignUpPage(),
+                        builder: (context) => const HomePage(),
                       ),
                     );
-                  },
-                  child: const Text('Sign Up', style: TextStyle(color: Color.fromARGB(255, 0, 0, 0))), // Change text color
+                  }
+                },
+                style: ButtonStyle(
+                  backgroundColor: MaterialStateProperty.all<Color>(
+                    const Color(0xFF004CFF),
+                  ),
                 ),
-              ],
+                child: const Text('Sign In'),
+              ),
+            ),
+            const SizedBox(height: 16.0),
+            const Text('Already have an account?'),
+            TextButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SignUpPage(),
+                  ),
+                );
+              },
+              style: ButtonStyle(
+                foregroundColor: MaterialStateProperty.all<Color>(
+                  const Color(0xFF004CFF),
+                ),
+              ),
+              child: const Text(
+                'Sign In',
+                style: TextStyle(
+                  decoration: TextDecoration.underline,
+                  decorationStyle: TextDecorationStyle.solid,
+                  decorationThickness: 2.0,
+                ),
+              ),
             ),
           ],
         ),

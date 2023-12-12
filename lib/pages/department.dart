@@ -287,12 +287,7 @@ class _DepartmentPageState extends State<DepartmentPage> {
                     onPressed: () {
                       fetchDepartments();
                     },
-                    style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(
-      Color.fromARGB(255, 255, 0, 0),
-    ),
-    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
-  ),
+                    
                     child: Row(
     mainAxisSize: MainAxisSize.min,
     children: [

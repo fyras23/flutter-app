@@ -161,7 +161,7 @@ class _ClassPageState extends State<ClassPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                            backgroundColor: Color(0xFFC7DAD5),
                             title: const Text('Add class'),
                             content: SizedBox(
                               width: 300,
