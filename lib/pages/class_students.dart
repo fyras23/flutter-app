@@ -38,7 +38,7 @@ class _ClassStudentsPageState extends State<ClassStudentsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       backgroundColor: Color(0xFF84a59d),
+       backgroundColor: Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         title: Text(
           widget.classRoom.name,

@@ -161,7 +161,7 @@ class _ClassPageState extends State<ClassPage> {
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            backgroundColor: Color(0xFFC7DAD5),
+                            backgroundColor: Color.fromARGB(255, 255, 255, 255),
                             title: const Text('Add class'),
                             content: SizedBox(
                               width: 300,
@@ -288,6 +288,7 @@ class _ClassPageState extends State<ClassPage> {
                     onPressed: () {
                       fetchClasses();
                     },
+                    
                     style: ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(
       Color.fromARGB(255, 255, 0, 0),

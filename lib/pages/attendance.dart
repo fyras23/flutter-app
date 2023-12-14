@@ -10,7 +10,6 @@ import 'package:client/services/subject_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-
 import '../models/student_model.dart';
 import '../services/attendance_service.dart';
 
@@ -19,13 +18,19 @@ class AttendancePage extends StatefulWidget {
 
   @override
   State<AttendancePage> createState() => _AttendancePageState();
-  
 }
 
 class _AttendancePageState extends State<AttendancePage> {
   Future<List<Student>> _students = getAllStudents();
   Future<List<Subject>> _subjects = getAllSubjects();
   Subject? dropdownValue;
+  Subject? secondDropdownValue;
+
+  void refreshStudents() {
+    setState(() {
+      _students = getAllStudents();
+    });
+  }
 
   void fetchStudents() async {
     setState(() {
@@ -36,6 +41,7 @@ class _AttendancePageState extends State<AttendancePage> {
     List<Subject> subjects = await _subjects;
     setState(() {
       dropdownValue = subjects[0];
+      secondDropdownValue = subjects[0];
     });
   }
 
@@ -47,7 +53,7 @@ class _AttendancePageState extends State<AttendancePage> {
 
   DateTime _selectedDate = DateTime.now();
 
-    Future<void> selectDate(BuildContext context) async {
+  Future<void> selectDate(BuildContext context) async {
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: _selectedDate,
@@ -58,25 +64,24 @@ class _AttendancePageState extends State<AttendancePage> {
     if (picked != null && picked != _selectedDate) {
       setState(() {
         _selectedDate = picked;
-        _dateController.text =
-            _selectedDate.toLocal().toString().split(' ')[0];
+        _dateController.text = _selectedDate.toLocal().toString().split(' ')[0];
       });
     }
   }
 
-void addAttendance(Attendance attendance) async {
-  await createAttendance(attendance);
-  fetchStudents();
-}
+  void addAttendance(Attendance attendance) async {
+    await createAttendance(attendance);
+    fetchStudents();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'ISET ',
+          'ISET',
           style: TextStyle(
-            color: Color.fromARGB(255, 255, 0, 0),
+            color: Color.fromARGB(255, 255, 1, 1),
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
@@ -88,7 +93,7 @@ void addAttendance(Attendance attendance) async {
           builder: (context) => IconButton(
             icon: const Icon(
               Icons.menu,
-              color: Color.fromARGB(255, 255, 17, 0),
+              color: Colors.black,
             ),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
@@ -115,7 +120,7 @@ void addAttendance(Attendance attendance) async {
           children: [
             const DrawerHeader(
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 255, 17, 0),
+                color: Color.fromARGB(255, 255, 2, 2),
               ),
               child: Text(
                 'Menu',
@@ -170,12 +175,10 @@ void addAttendance(Attendance attendance) async {
           ],
         ),
       ),
-      body: 
-      SizedBox(
+      body: SizedBox(
         height: double.infinity,
         width: double.infinity,
-        child:
-        Container(
+        child: Container(
           margin: const EdgeInsets.all(8.0),
           child: FutureBuilder<List<Student>>(
             future: _students,
@@ -189,188 +192,194 @@ void addAttendance(Attendance attendance) async {
                         onTap: () {
                           Student student = snapshot.data![index];
 
-  showDialog(
-  context: context,
-  builder: (BuildContext context) {
-    return AlertDialog(
-      title: const Text('Add Attendance'),
-      content: 
-      Form(
-        key: _formKey,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: <Widget>[
-            TextFormField(
-              controller: _dateController,
-              decoration: const InputDecoration(
-                labelText: 'Date',
-              ),
-              onTap: () {
-                selectDate(context);
-              },
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter date';
-                }
-                return null;
-              },
-            ),
-            TextFormField(
-              controller: _numberOfHoursController,
-              decoration: const InputDecoration(
-                labelText: 'Number of hours',
-              ),
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Please enter number of hours';
-                }
-                return null;
-              },
-            ),
-            DropdownButtonFormField<Subject>(
-              value: dropdownValue,
-              icon: const Icon(Icons.arrow_downward),
-              
-              decoration: const InputDecoration(
-                labelText: 'Subject',
-              ),
-              onChanged: (Subject? newValue) {
-                setState(() {
-                  dropdownValue = newValue;
-                });
-              },
-              items: snapshot.data![index].classRoom!.subjects!.map<DropdownMenuItem<Subject>>((Subject value) {
-                return DropdownMenuItem<Subject>(
-                  value: value,
-                  child: Text(value.name),
-                );
-              }).toList(),
-            ),
-          ],
-        ),
-      ),  
-      actions: <Widget>[
-        TextButton(
-          child: const Text('Cancel'),
-          style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(
-      Color.fromARGB(255, 255, 0, 0),
-    ),
-    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
-  ),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-        TextButton(
-          child: const Text('Add'),
-          style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(
-      Color.fromARGB(255, 255, 0, 0),
-    ),
-    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
-  ),
-          onPressed: () {
-            Attendance attendance = Attendance(
-              date: _dateController.text,
-              numberOfHours: double.parse(_numberOfHoursController.text),
-              student: student,
-              subject: dropdownValue,
-            );
-            addAttendance(attendance);
-            Navigator.of(context).pop();
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AttendancePage(),
-              ),
-            );
-          },
-        ),
-      ],
-    );
-  },
-);
-},
-                        title: Text('${snapshot.data![index].firstName} ${snapshot.data![index].lastName}'),
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Add Attendance'),
+                                content: Form(
+                                  key: _formKey,
+                                  child: Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: <Widget>[
+                                      TextFormField(
+                                        controller: _dateController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Date',
+                                        ),
+                                        onTap: () {
+                                          selectDate(context);
+                                        },
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter date';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      TextFormField(
+                                        controller: _numberOfHoursController,
+                                        decoration: const InputDecoration(
+                                          labelText: 'Number of hours',
+                                        ),
+                                        validator: (value) {
+                                          if (value == null || value.isEmpty) {
+                                            return 'Please enter number of hours';
+                                          }
+                                          return null;
+                                        },
+                                      ),
+                                      DropdownButtonFormField<Subject>(
+                                        value: dropdownValue,
+                                        icon: const Icon(Icons.arrow_downward),
+                                        decoration: const InputDecoration(
+                                          labelText: 'Subject',
+                                        ),
+                                        onChanged: (Subject? newValue) {
+                                          setState(() {
+                                            dropdownValue = newValue;
+                                          });
+                                        },
+                                        items: snapshot
+                                            .data![index].classRoom!.subjects!
+                                            .map<DropdownMenuItem<Subject>>(
+                                                (Subject value) {
+                                          return DropdownMenuItem<Subject>(
+                                            value: value,
+                                            child: Text(value.name),
+                                          );
+                                        }).toList(),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                actions: <Widget>[
+                                  TextButton(
+                                    child: const Text('Cancel'),
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                  ),
+                                  TextButton(
+                                    child: const Text('Add'),
+                                    onPressed: () {
+                                      Attendance attendance = Attendance(
+                                        date: _dateController.text,
+                                        numberOfHours: double.parse(
+                                            _numberOfHoursController.text),
+                                        student: student,
+                                        subject: dropdownValue,
+                                      );
+                                      addAttendance(attendance);
+                                      Navigator.of(context).pop();
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) =>
+                                              const AttendancePage(),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        title: Text(
+                            '${snapshot.data![index].firstName} ${snapshot.data![index].lastName}'),
                         subtitle: Text(snapshot.data![index].classRoom!.name),
-                        leading: const Icon(Icons.person),
+                        leading: IconButton(
+                          icon: const Icon(Icons.person),
+                          onPressed: () {
+                            double totalHoursPerSubject = 0;
+                            
+                          },
+                           style: ButtonStyle(
+    backgroundColor: MaterialStateProperty.all<Color>(
+      Color.fromARGB(255, 255, 0, 0),
+    ),
+    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
+  ),
+                          
+                        ),
                         
                         trailing: IconButton(
-                         icon: const Icon(Icons.remove_red_eye),
-                         style: ButtonStyle(
+                          icon: const Icon(Icons.list),
+                           style: ButtonStyle(
     backgroundColor: MaterialStateProperty.all<Color>(
       Color.fromARGB(255, 255, 0, 0),
     ),
     foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
   ),
-                         
-  onPressed: () async {
-    // Retrieve the total attendance hours via API call
-    try {
-      String? studentId = snapshot.data![index].id; // Be sure you have the correct ID for the student
-      double totalHoursMap = await getTotalAttendanceHours(studentId!);
+                          
+                          onPressed: () async {
+                            try {
+                              String? studentId = snapshot.data![index].id;
+                              double totalHoursMap =
+                                  await getTotalAttendanceHours(studentId!);
 
-      // Assuming 'totalHoursMap' comes in the form of {'total_hours': double}
-      double totalHours = totalHoursMap;
-      // get the Attendances
-      // ignore: unused_local_variable
+                              double totalHours = totalHoursMap;
+                              
 
-      // Show the AlertDialog with total hours
-      // ignore: use_build_context_synchronously
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          List<Attendance> attendances = [];
-          return AlertDialog(
-            title: Text('Total Attendance Hours: $totalHours'),
-            content: FutureBuilder<List<Attendance>>(
-              future: getAttendance(studentId),
-              builder: (context, snapshot) {
-                if (snapshot.hasData) {
-                  attendances = snapshot.data!;
-                  return SizedBox(
-                    height: 200,
-                    width: 200,
-                    child: ListView.builder(
-                      itemCount: attendances.length,
-                      itemBuilder: (context, index) {
-                        return ListTile(
-                          title: Text(attendances[index].subject!.name),
-                          subtitle: Text(DateFormat('yyyy-MM-dd').format(DateTime.parse(attendances[index].date!))),
-                          trailing: Text(attendances[index].numberOfHours.toString()),
-                        );
-                      },
-                    ),
-                  );
-                } else if (snapshot.hasError) {
-                  return Text('${snapshot.error}');
-                }
-                return const CircularProgressIndicator();
-              },
-            ),
-            actions: <Widget>[
-              TextButton(
-                child: const Text('Close'),
-                style: ButtonStyle(
-    backgroundColor: MaterialStateProperty.all<Color>(
-      Color.fromARGB(255, 255, 0, 0),
-    ),
-    foregroundColor: MaterialStateProperty.all<Color>(Colors.white), // Set text color to white
-  ),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-              ),
-            ],
-          );
-        },
-      );
-    } catch (e) {
-      // Handle the error or show an error dialog/message
-      print('Failed to load total attendance hours: $e');
-    }
-  },
+                              // Show the AlertDialog with total hours
+                              // ignore: use_build_context_synchronously
+                              showDialog(
+                                context: context,
+                                builder: (BuildContext context) {
+                                  List<Attendance> attendances = [];
+                                  return AlertDialog(
+                                    title:
+                                        Text('Totat Hours: $totalHours hours'),
+                                    content: FutureBuilder<List<Attendance>>(
+                                      future: getAttendance(studentId),
+                                      builder: (context, snapshot) {
+                                        if (snapshot.hasData) {
+                                          attendances = snapshot.data!;
+                                          return SizedBox(
+                                            height: 200,
+                                            width: 200,
+                                            child: ListView.builder(
+                                              itemCount: attendances.length,
+                                              itemBuilder: (context, index) {
+                                                return ListTile(
+                                                  title: Text(attendances[index]
+                                                      .subject!
+                                                      .name),
+                                                  subtitle: Text(DateFormat(
+                                                          'yyyy-MM-dd')
+                                                      .format(DateTime.parse(
+                                                          attendances[index]
+                                                              .date!))),
+                                                  trailing: Text(
+                                                      "${attendances[index].numberOfHours}h"),
+                                                );
+                                              },
+                                            ),
+                                          );
+                                        } else if (snapshot.hasError) {
+                                          return Text('${snapshot.error}');
+                                        }
+                                        return const CircularProgressIndicator();
+                                      },
+                                    ),
+                                    actions: <Widget>[
+                                      TextButton(
+                                        child: const Text('Close'),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  );
+                                },
+                              );
+                            } catch (e) {
+                              // Handle the error or show an error dialog/message
+                              print(
+                                  'Failed to load total attendance hours: $e');
+                            }
+                          },
                         ),
                       ),
                     );

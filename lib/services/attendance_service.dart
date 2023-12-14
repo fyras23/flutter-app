@@ -17,24 +17,26 @@ Future<Attendance> createAttendance(Attendance attendance) async {
 
     if (response.statusCode == 200) {
       // Assuming status code 200 means success. Adjust according to your API spec.
-      Attendance newAttendance = Attendance.fromJson(json.decode(response.body));
+      Attendance newAttendance =
+          Attendance.fromJson(json.decode(response.body));
       print("this is second line");
       print(newAttendance.toJson());
       return newAttendance;
     } else {
       // Handle non-200 responses or add specific status code checks as per your API spec.
       print('Request failed with status: ${response.statusCode}.');
-      throw Exception('Failed to create attendance'); 
+      throw Exception('Failed to create attendance');
     }
   } on Exception catch (e) {
     print('Caught exception: $e');
     rethrow; // Optionally rethrow the exception after logging it or handling it.
   }
-  
 }
+
 Future<double> getTotalAttendanceHours(String studentId) async {
   print("this is student id $studentId");
-  final uri = Uri.parse('http://10.0.2.2:8055/api/v1/attendances/$studentId/total');
+  final uri =
+      Uri.parse('http://10.0.2.2:8055/api/v1/attendances/$studentId/total');
   final response = await http.get(uri);
 
   if (response.statusCode == 200) {
@@ -44,14 +46,17 @@ Future<double> getTotalAttendanceHours(String studentId) async {
     throw Exception('Failed to load attendance data');
   }
 }
+
 Future<List<Attendance>> getAttendance(String studentId) async {
   final uri = Uri.parse('http://10.0.2.2:8055/api/v1/attendances/$studentId');
   final response = await http.get(uri);
   if (response.statusCode == 200) {
-        return (json.decode(response.body) as List)
+    return (json.decode(response.body) as List)
         .map((student) => Attendance.fromJson(student))
         .toList();
   } else {
     throw Exception('Failed to load attendance data');
   }
 }
+
+
